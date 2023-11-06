@@ -88,12 +88,32 @@ export function UserDetails({ wallet, setWallet }: UserDetailsProps) {
           </Label>
         </div>
       </CardContent>
-      <CardFooter>
-        <Button  variant="link" className="w-full" onClick={() => {
-          window.open(`https://explorer.solana.com/address/${wallet}?cluster=devnet`, '_blank');
-        }}>
-          View Transaction History
-        </Button>
+      <CardFooter className="flex flex-col">
+        <div className="w-full">
+          <Button
+            variant="link"
+            className="w-full"
+            onClick={() => {
+              window.open(
+                `https://explorer.solana.com/address/${wallet}?cluster=devnet`,
+                "_blank"
+              );
+            }}
+          >
+            View Transaction History
+          </Button>
+        </div>
+        <div className="mt-5 w-full">
+          <Button
+            variant="default"
+            className="w-full"
+            onClick={() => {
+              setWallet("");
+            }}
+          >
+            Disconnect Wallet
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   );
