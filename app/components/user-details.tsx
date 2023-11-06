@@ -49,18 +49,7 @@ export function UserDetails({ wallet, setWallet }: UserDetailsProps) {
 
     return () => {};
   }, [getBalance, balance]);
-
-  // .roundImageContainer {
-  //   border-radius: 50%; /* Makes the image round */
-  //   overflow: hidden; /* Ensures the corners outside the border-radius are not visible */
-  //   display: inline-block; /* Wraps the container around the image */
-  //   transition: transform 0.3s ease; /* Smooth transformation */
-  // }
-
-  // .roundImageContainer:hover {
-  //   transform: scale(1.1); /* Zoom effect on hover */
-  // }
-
+  
   return (
     <Card>
       <CardHeader>
@@ -81,10 +70,6 @@ export function UserDetails({ wallet, setWallet }: UserDetailsProps) {
             /> */}
             <span>Balance:</span>
             <span className="text-xl">{balance} SOL</span>
-            <span className="font-normal leading-snug text-muted-foreground">
-              These cookies are essential in order to use the website and use
-              its features.
-            </span>
           </Label>
         </div>
       </CardContent>
