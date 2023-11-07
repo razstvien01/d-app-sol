@@ -27,7 +27,7 @@ export const Connect = ({ wallet, setWallet }: ConnectProps) => {
         }}
       ></div>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px] text-center">
-        <h1 className="text-6xl font-bold tracking-tight mb-8">dApp</h1>
+        <h1 className="text-6xl font-bold tracking-tight mb-8">SolQuoWallet</h1>
         <h1 className="text-2xl font-semibold tracking-tight">
           Connect Wallet
         </h1>
