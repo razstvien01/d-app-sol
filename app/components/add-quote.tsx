@@ -42,6 +42,8 @@ export function AddQuote() {
   //* Function to handle form submission
   const handleSubmit = async () => {
     setIsSave(true);
+    
+    console.log(quoteData)
     // const result = await addMemberInOrg({ memberData: addMember, org_id });
 
     // if (result.success) {
