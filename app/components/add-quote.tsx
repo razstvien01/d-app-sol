@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { Dispatch, useState, SetStateAction } from "react";
 import { Loader } from "lucide-react";
 
 interface QuoteDataType {
@@ -25,7 +25,12 @@ const QuoteDataInit: QuoteDataType = {
   quote: "",
 };
 
-export function AddQuote() {
+interface AddQuoteProps {
+  quotes: QuoteDataType[];
+  setQuotes: Dispatch<SetStateAction<QuoteDataType[]>>;
+}
+
+export function AddQuote({ quotes, setQuotes }: AddQuoteProps) {
   const [quoteData, setQuoteData] = useState<QuoteDataType>(QuoteDataInit);
   const [showDialog, setShowDialog] = useState(false);
   const [isSave, setIsSave] = useState<boolean>(false);
@@ -38,18 +43,23 @@ export function AddQuote() {
     const { id, value } = e.target;
     setQuoteData((prev: QuoteDataType) => ({ ...prev, [id]: value }));
   };
-  
+
   //* Function to handle form submission
   const handleSubmit = async () => {
     setIsSave(true);
     
-    console.log(quoteData)
+    setQuotes((prevQuotes) => [...prevQuotes, quoteData]);
+    
+    console.log(quotes)
+    
+    // setQuotes((prev: QuoteDataType))
+    // console.log(quotes)
     // const result = await addMemberInOrg({ memberData: addMember, org_id });
 
     // if (result.success) {
-      
+
     //   const { full_name, user_id, photo_url } = userData
-      
+
     //   const params = {
     //     user_id,
     //     org_id,
@@ -58,9 +68,9 @@ export function AddQuote() {
     //     description: `${full_name} added ${addMember.user_id} with the role of ${addMember.role} in the ${org_name} organization`,
     //     type: "organization",
     //   };
-      
+
     //   await createNotif(params)
-      
+
     //   setHasSubmitted(true)
     //   setToastParams({
     //     title: "Add Member",
@@ -79,6 +89,8 @@ export function AddQuote() {
     //     error: true,
     //   }));
     // }
+    
+    setShowDialog(false)
 
     setIsSave(false);
   };
@@ -105,7 +117,7 @@ export function AddQuote() {
             <Label>Author</Label>
             <Input
               id="author"
-              placeholder="Enter the user's id"
+              placeholder="Enter author's name"
               onChange={(e) => handleOnchangeData(e)}
             />
           </div>

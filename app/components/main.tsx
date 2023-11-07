@@ -1,14 +1,15 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { UserDetails } from "./user-details";
 import { Button } from "@/components/ui/button";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { AddQuote } from "./add-quote";
 import { QuoteCard } from "./quote-card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Define the type for the data structure
-interface Quote {
+interface QuoteDataType {
   author: string;
   quote: string;
 }
@@ -19,7 +20,7 @@ interface MainProps {
 }
 
 export const Main = ({ wallet, setWallet }: MainProps) => {
-  const [quotes, setQuotes] = useState<Quote[]>([
+  const [quotes, setQuotes] = useState<QuoteDataType[]>([
     {
       author: "Albert Einstein",
       quote:
@@ -66,31 +67,48 @@ export const Main = ({ wallet, setWallet }: MainProps) => {
         "When you reach the end of your rope, tie a knot in it and hang on.",
     },
   ]);
+  
+  useEffect(() => {
+    
+  
+    return () => {
+      
+    }
+  }, [])
+  
 
   return (
     <>
-      {/* <div className="flex flex-col">
-        <div className="flex justify-end">
-          <AddQuote />
-        </div>
-        {quotes.map((quoteItem, index) => (
-          <div key={index} className="flex flex-col gap-16">
-            <blockquote>{quoteItem.quote}</blockquote>
-            <p>- {quoteItem.author}</p>
-          </div>
-        ))}
-      </div> */}
       <div className="flex">
-        <div className="mt-20">
-          {quotes.map((quoteItem, index) => (
-            <QuoteCard key={index} author={quoteItem.author} quote={quoteItem.quote}/>
-          ))}
-        </div>
-        <div className="justify-end">
-          <AddQuote />
+        <div className="flex-grow">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl pl-10">
+              SOL QUOTES
+            </h1>
+            <AddQuote quotes={quotes} setQuotes={setQuotes} />
+          </div>
+          <ScrollArea className="h-[800px] w-full rounded-md border">
+            {/* {quotes.map((quoteItem, index) => (
+              <QuoteCard
+                key={index}
+                author={quoteItem.author}
+                quote={quoteItem.quote}
+              />
+            ))} */}
+            {quotes
+              .slice()
+              .reverse()
+              .map((quoteItem, index) => (
+                <QuoteCard
+                  key={index}
+                  author={quoteItem.author}
+                  quote={quoteItem.quote}
+                />
+              ))}
+          </ScrollArea>
         </div>
 
-        <aside className="w-1/4 p-4 h-screen sticky top-0">
+        <aside className="w-1/2 p-4 h-screen sticky top-0">
           <div>
             <UserDetails wallet={wallet} setWallet={setWallet} />
           </div>
